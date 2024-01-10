@@ -1,0 +1,58 @@
+{% extends 'main-base.html' %}
+{% load humanize %}
+
+{% block title %}
+    Detail
+{% endblock %}
+
+{% block main %}
+    {% if task.owner == request.user %}
+        <div class="w-100 d-flex">
+            <li class="list-group-item list-group-item-primary p-3 rounded-2 m-1 fs-2 w-100 text-break">
+                <p>
+                    Title: {{ task.title }} ( <a href="{% url 'todo:edit' task.id %}" class="link-primary link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover">Update</a> | <a href="{% url 'todo:delete' task.id %}" class="link-danger link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover">Delete</a> )
+                </p>
+                <p class="fs-4">
+                    description: {{ task.description }}
+                </p>
+                <p class="fs-5">
+                    created {{ task.created_time | naturaltime }} | updated {{ task.updated_time | naturaltime }}
+                </p>
+                <p class="fs-5">
+                    status: {{ task.status }}
+                </p>
+                <p class="fs-6">
+                    posted by {{ task.owner }}
+                </p>
+            </li>
+        </div>
+    {% else %}
+        <div class="w-100 d-flex">
+            <li class="list-group-item list-group-item-secondary p-3 rounded-2 m-1 fs-2 w-100 text-break">
+                <p>
+                    Title: {{ task.title }}
+                </p>
+                <p class="fs-4">
+                    description: {{ task.description }}
+                </p>
+                <p class="fs-5">
+                    created {{ task.created_time | naturaltime }} | updated {{ task.updated_time | naturaltime }}
+                </p>
+                <p class="fs-5">
+                    status: {{ task.status }}
+                </p>
+                <p class="fs-6">
+                    posted by {{ task.owner }}
+                </p>
+            </li>                                    
+        </div>
+    {% endif %}
+    <button type="button" onclick="navigateToLink()" class="btn btn-secondary mt-3">Back</button>
+
+    <script>
+        function navigateToLink()
+        {
+            window.location.href = "{% url 'todo:list_create' %}";
+        }
+    </script>
+{% endblock %}

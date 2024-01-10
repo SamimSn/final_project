@@ -1,0 +1,24 @@
+{% extends 'main-base.html' %}
+{% load humanize %}
+
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block main %}
+
+    <form action="" method="post" class="d-flex flex-column justify-content-center align-items-center">
+        {% csrf_token %}    
+        <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3">Deleting a Task is considered a permenant action. Continue?</div>    
+        <div class="d-flex justify-content-center">
+            <input type="submit" value="Yes, delete." class="btn btn-danger mt-3 mx-2">
+            <button type="button" onclick="navigateToLink()" class="btn btn-secondary mt-3 mx-2">Back</button>
+        </div>        
+    </form>
+
+    <script>
+        function navigateToLink() {
+            window.location.href = "{% url 'todo:list_create' %}";
+        }
+    </script>
+{% endblock %}

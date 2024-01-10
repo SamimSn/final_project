@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Sign up
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100 bg-secondary">            
+        <div class="container bg-dark text-light rounded-2" style="width: fit-content;">
+            <form action="" method="post" class="p-5 d-flex flex-column justify-content-center align-items-center">
+                {% csrf_token %}                   
+                <h1 class="mb-4">Sign Up</h1>                                    
+                {% if messages %}   
+                    {% for message in messages %}                                                     
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>                                                            
+                    {% endfor %}
+                {% endif %}                    
+                {{ form | crispy }}            
+                <p class="m-2">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                <input type="submit" class="btn btn-primary mt-4" value="Sign Up">                
+            </form>
+        </div>
+    </div>    
+{% endblock %}

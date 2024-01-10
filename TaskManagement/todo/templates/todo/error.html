@@ -1,0 +1,16 @@
+{% extends 'main-base.html' %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block main %}
+    <h1>{{ error }}</h1>
+    <button type="button" onclick="navigateToLink()" class="btn btn-secondary mt-3 mx-2">Back</button>
+
+    <script>
+        function navigateToLink() {
+            window.location.href = "{% url 'todo:list_create' %}";
+        }
+    </script>
+{% endblock %}

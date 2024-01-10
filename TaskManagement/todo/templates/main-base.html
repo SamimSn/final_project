@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="d-flex flex-column">
+	<div class="container bg-dark text-white d-flex justify-content-between align-items-center p-4">
+		{% if user.is_authenticated %}			
+			<div class="d-flex flex-column align-items-end">
+				<h1 class="m-0">Welcome, {{ user.username }}</h1>
+				<a href="{% url 'api:tasks_list_create_api' %}" class="link-success link-offset-1 fs-5 link-underline-opacity-25 link-underline-opacity-100-hover">restAPI</a>
+			</div>
+			<form action="{% url 'logout' %}" method="post">
+				{% csrf_token %}
+				<input type="submit" value="Logout" class="btn btn-outline-light fs-5">
+			</form>							
+		{% else %}
+			<form action="{% url 'login' %}">
+				{% csrf_token %}
+				<input type="submit" value="Login" class="btn btn-outline-light fs-5">
+			</form>
+		{% endif %}
+	</div>	
+
+	<div class="container bg-light d-flex flex-column justify-content-center align-items-center p-4">
+		{% block main %}{% endblock %}
+	</div>
+</div>
+{% endblock %}

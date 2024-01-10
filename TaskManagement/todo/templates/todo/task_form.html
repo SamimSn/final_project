@@ -1,0 +1,23 @@
+{% extends 'main-base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Update
+{% endblock %}
+
+{% block main %}
+    <form action="" class="d-flex flex-column justify-content-center align-items-center w-100" method="post">
+        {% csrf_token %}
+        {{ form | crispy }} 
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-primary mt-3 mx-2">
+            <button type="button" onclick="navigateToLink()" class="btn btn-secondary mt-3 mx-2">Back</button>
+        </div>           
+    </form>
+
+    <script>
+        function navigateToLink() {
+            window.location.href = "{% url 'todo:list_create' %}";
+        }
+    </script>
+{% endblock %}
